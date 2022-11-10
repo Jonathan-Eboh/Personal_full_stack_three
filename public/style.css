@@ -1,0 +1,100 @@
+body{
+  /* padding-top:80px; */
+  word-wrap:break-word;
+}
+img{
+  height: 100px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+     content: ".";
+     display: block;
+     clear: both;
+     visibility: hidden;
+     line-height: 0;
+     height: 0;
+}
+
+.clear {
+	clear: both;
+}
+
+.hidden{
+  display: none;
+}
+
+/* nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+}
+
+nav li {
+  display: flex;
+  flex-direction: row;
+} */
+
+
+nav{
+
+}
+
+nav li {
+  /* display: inline; */
+
+}
+
+header{
+  background: gray;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.2em;
+}
+
+
+.movie-data {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* font-size: 1.2em; */
+}
+
+.drinks-data{
+/* display: inline-block; */
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.food-data{
+/* display: inline-block; */
+  display: flex;
+  justify-content: space-around;
+}
+
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.formContainer{
+  width: 25%;
+}
+
+.event-data span{
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
