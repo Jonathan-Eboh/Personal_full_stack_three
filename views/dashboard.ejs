@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Event page</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/font-awesome.min.css">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+    <header>
+        <nav>
+
+            <ul>
+                <li>
+                    <a href="/projects">See all your projects</a>
+                </li>
+
+            </ul>
+        </nav>
+    </header>
+
+
+
+
+
+
+
+
+    <section class="formContainer">
+        <form action="/addProject" method="POST">
+
+            <label for="scrumMaster">Scrum Master</label>
+            <input type="text" placeholder="Person 1" name="scrumMaster">
+            <label for="teamMemberOne">First team member</label>
+            <input type="text" placeholder="Person 2" name="teamMemberOne">
+            <label for="teamMemberTwo">Second team member</label>
+            <input type="text" placeholder="Person 3" name="teamMemberTwo">
+            <label for="projectTitle">Name your project!</label>
+            <input type="text" placeholder="Project Title" name="projectTitle">
+            <label for="date">Completion deadline</label>
+            <input type="date" name="date" id="dateSelect">
+            <button type="submit">Track project!</button>
+            <select name="projectProgress" id="projectProgressSelect">
+                <option value="">--Project Progress--</option>
+                <option value="high">New</option>
+                <option value="low">Halfway completed</option>
+                <option value="mid">Urgent</option>
+            </select>
+        </form>
+    </section>
+    <script src="/main.js"></script>
+
+
+
+</body>
+
+</html>

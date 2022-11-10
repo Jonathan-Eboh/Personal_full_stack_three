@@ -88,21 +88,61 @@ module.exports = function (app, passport, db) {
     //if time permits make route to update already existing events
 
 
-    //_____________________________________________
-    //Working with object id
+    //________________srcum app backend logic here____
+
+    //home
+    app.get('/dashboard', async (req, res) => {
+
+        // const eventResult = await db.collection('events').find().toArray()
+        res.render('dashboard.ejs')
+    })
+
+    //projects
+    app.get('/projects', async (req, res) => {
+
+        const eventResult = await db.collection('events').find().toArray()
+        res.render('projects.ejs', { event: eventResult })
+    })
+
+    //create
+
+    app.post('/addProject', (req, res) => {
+
+        console.log(req.body);
+
+        db.collection('projects').insertOne({
+
+            //pick up here, initialize completed to false.
+
+            //send all the details of the event to the database
+            date: req.body.date,
+            personOne: req.body.personOne.trim(),
+            personTwo: req.body.personTwo.trim(),
+            personThree: req.body.personThree.trim(),
+            batmovie: req.body.batmovie,
+            starmovie: req.body.starmovie,
+            eventTitle: req.body.eventTitle.trim()
+
+        }, (err, result) => {
+            if (err) return console.log(err)
+            console.log('event added to database!')
+            //res.render('event_details.ejs', { cart: result })
+        })
+    })
 
 
-    // app.get('/viewCluster/:clusterId', async (req, res) => {
-    //     console.log(req.params.clusterId);
-    //     console.log("This is req.params._id: ", req.params._id);
+    //read
 
-    //     const infoClusterItemsResult = await db.collection('info_cluster_item').find({
-    //         cluster_id: ObjectID(req.params.clusterId)
-    //     }).toArray()
-    //     console.log(infoClusterItemsResult);
+    //update
 
-    //     res.render('viewCluster.ejs', { infoClusterItems: infoClusterItemsResult })
-    // })
+    //delete
+
+
+    //________________________________________________
+
+
+
+
 
 
     //_____________________________________________
@@ -195,21 +235,21 @@ module.exports = function (app, passport, db) {
 
 
     //change value of check
-    app.put('/completetask', (req, res) => {
-        db.collection('todolist')
-            .findOneAndUpdate({ task: req.body.task }, {
-                $set: {
-                    // thumbUp: req.body.thumbUp + 1
-                    completed: true
-                }
-            }, {
-                    sort: { _id: -1 },
-                    upsert: true
-                }, (err, result) => {
-                    if (err) return res.send(err)
-                    res.send(result)
-                })
-    })
+    // app.put('/completetask', (req, res) => {
+    //     db.collection('todolist')
+    //         .findOneAndUpdate({ task: req.body.task }, {
+    //             $set: {
+    //                 // thumbUp: req.body.thumbUp + 1
+    //                 completed: true
+    //             }
+    //         }, {
+    //                 sort: { _id: -1 },
+    //                 upsert: true
+    //             }, (err, result) => {
+    //                 if (err) return res.send(err)
+    //                 res.send(result)
+    //             })
+    // })
 
     //delete
 
@@ -235,7 +275,7 @@ module.exports = function (app, passport, db) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/event', // redirect to the secure profile section
+        successRedirect: '/dashboard', // redirect to the secure profile section
         failureRedirect: '/login', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -248,7 +288,7 @@ module.exports = function (app, passport, db) {
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/event', // redirect to the secure profile section
+        successRedirect: '/dashboard', // redirect to the secure profile section
         failureRedirect: '/signup', // redirect back to the signup page if there is an error
         failureFlash: true // allow flash messages
     }));
@@ -266,7 +306,7 @@ module.exports = function (app, passport, db) {
         user.local.email = undefined;
         user.local.password = undefined;
         user.save(function (err) {
-            res.redirect('/event');
+            res.redirect('/dashboard');
         });
     });
 
