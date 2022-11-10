@@ -90,18 +90,11 @@ module.exports = function (app, passport, db) {
 
     //________________srcum app backend logic here____
 
-    //home
+    //read
     app.get('/dashboard', async (req, res) => {
 
-        // const eventResult = await db.collection('events').find().toArray()
-        res.render('dashboard.ejs')
-    })
-
-    //projects
-    app.get('/projects', async (req, res) => {
-
-        const eventResult = await db.collection('events').find().toArray()
-        res.render('projects.ejs', { event: eventResult })
+        const projectResult = await db.collection('projects').find().toArray()
+        res.render('dashboard.ejs', { project: projectResult })
     })
 
     //create
@@ -112,16 +105,15 @@ module.exports = function (app, passport, db) {
 
         db.collection('projects').insertOne({
 
-            //pick up here, initialize completed to false.
+            //send all the details of the project to the database
 
-            //send all the details of the event to the database
-            date: req.body.date,
-            personOne: req.body.personOne.trim(),
-            personTwo: req.body.personTwo.trim(),
-            personThree: req.body.personThree.trim(),
-            batmovie: req.body.batmovie,
-            starmovie: req.body.starmovie,
-            eventTitle: req.body.eventTitle.trim()
+            scrumMaster: req.body.scrumMaster.trim(),
+            teamMemberOne: req.body.teamMemberOne.trim(),
+            teamMemberTwo: req.body.teamMemberTwo.trim(),
+            projectTitle: req.body.projectTitle,
+            deadline: req.body.deadline,
+            projectProgress: req.body.projectProgress.trim(),
+
 
         }, (err, result) => {
             if (err) return console.log(err)
@@ -131,12 +123,38 @@ module.exports = function (app, passport, db) {
     })
 
 
-    //read
-
     //update
+    app.put('/updateProjectStatus', (req, res) => {
+        console.log("THIS IS UPDATE PROJECT STATUS ON THE SERVER SIDE", req.body);
+
+        db.collection('projects')
+            .findOneAndUpdate({
+                _id: ObjectID(req.body.id)
+            }, {
+                    $set: {
+                        // update the project progress
+                        projectProgress: req.body.newProjectProgress.trim(),
+                    }
+                }, {
+                    sort: { _id: -1 },
+
+                }, (err, result) => {
+                    if (err) return res.send(err)
+                    res.send(result)
+                })
+
+    })
 
     //delete
 
+    app.delete('/removeProject', (req, res) => {
+        console.log(req.body);
+
+        db.collection('projects').findOneAndDelete({ _id: ObjectID(req.body._id) }, (err, result) => {
+            if (err) return res.send(500, err)
+            res.send('Event deleted!')
+        })
+    })
 
     //________________________________________________
 

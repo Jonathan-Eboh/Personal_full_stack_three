@@ -42,17 +42,95 @@
             <label for="projectTitle">Name your project!</label>
             <input type="text" placeholder="Project Title" name="projectTitle">
             <label for="date">Completion deadline</label>
-            <input type="date" name="date" id="dateSelect">
-            <button type="submit">Track project!</button>
+            <input type="date" name="deadline" id="dateSelect">
+
             <select name="projectProgress" id="projectProgressSelect">
                 <option value="">--Project Progress--</option>
                 <option value="high">New</option>
                 <option value="low">Halfway completed</option>
                 <option value="mid">Urgent</option>
             </select>
+            <button type="submit">Track project!</button>
         </form>
     </section>
+
+
+
+    <ul class="project-data">
+        <% for(var i=0; i<project.length; i++) {%>
+
+
+
+            <li class="message <%= project[i].Title %>">
+                <span>
+                    <%= project[i].Title %>
+                </span>
+                <span>
+
+                </span>
+
+                <span>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+
+                <span>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                </span>
+
+                <form action="/updateProjectStatus" method="PUT">
+                    <select name="projectProgress" id="projectProgressSelect">
+                        <option value="">--Project Progress--</option>
+                        <option value="new">New</option>
+                        <option value="half">Halfway completed</option>
+                        <option selected value="complete">completed</option>
+                    </select>
+                </form>
+
+            </li>
+
+            <% } %>
+    </ul>
+
+
+
+    <h3>Project display</h3>
+
+    <ul class="project-data">
+        <% for(var i=0; i<project.length; i++) {%>
+
+            <li class="message <%= project[i].Title %>">
+                <span>
+                    <%= project[i].Title %>
+
+                </span>
+                <span>
+
+                    <img src="<%= project[i].Poster %>" alt="<%= project[i].Title %>">
+                </span>
+
+                <span>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </span>
+
+                <span>
+                    <i class="fa fa-check-square" aria-hidden="true"></i>
+                </span>
+
+                <select class="updateProgress" name="newProjectProgress" id="<%= project[i]._id%>">
+                    <option value="">--Project Progress--</option>
+                    <option <%=project[i].projectProgress==='new' ? 'selected': '' %> value="new" >New</option>
+                    <option <%=project[i].projectProgress==='half' ? 'selected': '' %> value="half">Halfway completed</option>
+                    <option <%=project[i].projectProgress==='complete' ? 'selected': '' %> value="complete">completed</option>
+                </select>
+
+            </li>
+
+            <% } %>
+    </ul>
+
     <script src="/main.js"></script>
+
+
 
 
 
