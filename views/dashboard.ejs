@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Event page</title>
+    <title>project page</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="stylesheet" href="/font-awesome.min.css">
     <link rel="stylesheet" href="/style.css">
@@ -12,15 +12,7 @@
 
 <body>
     <header>
-        <nav>
-
-            <ul>
-                <li>
-                    <a href="/projects">See all your projects</a>
-                </li>
-
-            </ul>
-        </nav>
+        <h1>Scrum project manager</h1>
     </header>
 
 
@@ -46,9 +38,9 @@
 
             <select name="projectProgress" id="projectProgressSelect">
                 <option value="">--Project Progress--</option>
-                <option value="high">New</option>
-                <option value="low">Halfway completed</option>
-                <option value="mid">Urgent</option>
+                <option value="new">New</option>
+                <option value="half">Halfway completed</option>
+                <option value="complete">Completed</option>
             </select>
             <button type="submit">Track project!</button>
         </form>
@@ -56,51 +48,17 @@
 
 
 
-    <ul class="project-data">
-        <% for(var i=0; i<project.length; i++) {%>
 
 
 
-            <li class="message <%= project[i].Title %>">
-                <span>
-                    <%= project[i].Title %>
-                </span>
-                <span>
-
-                </span>
-
-                <span>
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </span>
-
-                <span>
-                    <i class="fa fa-check-square" aria-hidden="true"></i>
-                </span>
-
-                <form action="/updateProjectStatus" method="PUT">
-                    <select name="projectProgress" id="projectProgressSelect">
-                        <option value="">--Project Progress--</option>
-                        <option value="new">New</option>
-                        <option value="half">Halfway completed</option>
-                        <option selected value="complete">completed</option>
-                    </select>
-                </form>
-
-            </li>
-
-            <% } %>
-    </ul>
-
-
-
-    <h3>Project display</h3>
+    <h3>Project display, the progress of each tracked project can be updated via the drop down</h3>
 
     <ul class="project-data">
         <% for(var i=0; i<project.length; i++) {%>
 
             <li class="message <%= project[i].Title %>">
-                <span>
-                    <%= project[i].Title %>
+                <span id="<%= project[i]._id%>">
+                    <%= project[i].projectTitle %>
 
                 </span>
                 <span>
@@ -126,6 +84,65 @@
             </li>
 
             <% } %>
+
+                <table>
+                    <tr>
+                        <th>Project Title</th>
+                        <th>Deadline</th>
+                        <th>Scrum Master</th>
+                        <th>Team member 1</th>
+                        <th>Team member 2</th>
+
+                        <th>Progress</th>
+                        <th></th>
+                        <th>Delete</th>
+                    </tr>
+
+                    <% for(var i=0; i<project.length; i++) {%>
+
+
+
+                        <tr id="<%= project[i]._id%>">
+                            <td id="<%= project[i]._id%>">
+                                <%= project[i].projectTitle %>
+                            </td>
+                            <td>
+                                <%= project[i].deadline %>
+                            </td>
+                            <td>
+                                <%= project[i].scrumMaster %>
+                            </td>
+                            <td>
+                                <%= project[i].teamMemberOne %>
+                            </td>
+                            <td>
+                                <%= project[i].teamMemberTwo%>
+                            </td>
+                            <td>
+                                <%= project[i].projectProgress %>
+                            </td>
+
+
+
+                            <td>
+
+
+                                <select class="updateProgress" name="newProjectProgress" id="<%= project[i]._id%>">
+                                    <option value="">--Project Progress--</option>
+                                    <option <%=project[i].projectProgress==='new' ? 'selected': '' %> value="new" >New</option>
+                                    <option <%=project[i].projectProgress==='half' ? 'selected': '' %> value="half">Halfway completed</option>
+                                    <option <%=project[i].projectProgress==='complete' ? 'selected': '' %> value="complete">completed</option>
+                                </select>
+
+                            </td>
+                            <td>
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </td>
+                        </tr>
+                        <% } %>
+                </table>
+
+
     </ul>
 
     <script src="/main.js"></script>

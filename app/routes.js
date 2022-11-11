@@ -112,13 +112,13 @@ module.exports = function (app, passport, db) {
             teamMemberTwo: req.body.teamMemberTwo.trim(),
             projectTitle: req.body.projectTitle,
             deadline: req.body.deadline,
-            projectProgress: req.body.projectProgress.trim(),
+            projectProgress: req.body.projectProgress,
 
 
         }, (err, result) => {
             if (err) return console.log(err)
             console.log('event added to database!')
-            //res.render('event_details.ejs', { cart: result })
+            res.redirect('/dashboard')
         })
     })
 
@@ -148,11 +148,11 @@ module.exports = function (app, passport, db) {
     //delete
 
     app.delete('/removeProject', (req, res) => {
-        console.log(req.body);
+        console.log("This is req.body in removeProject server side", req.body);
 
         db.collection('projects').findOneAndDelete({ _id: ObjectID(req.body._id) }, (err, result) => {
             if (err) return res.send(500, err)
-            res.send('Event deleted!')
+            res.send('Project deleted!')
         })
     })
 

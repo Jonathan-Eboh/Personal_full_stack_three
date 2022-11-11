@@ -98,3 +98,8 @@ form{
   flex-direction: column;
   justify-content: center;
 }
+
+
+header h1 {
+  text-align: center;
+}
