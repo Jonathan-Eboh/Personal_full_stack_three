@@ -53,6 +53,7 @@ nav li {
 
 header{
   background: gray;
+  outline: 5px solid black;
 }
 
 nav ul {
@@ -90,7 +91,7 @@ form{
 }
 
 .formContainer{
-  width: 25%;
+  width: 10%;
 }
 
 .event-data span{
@@ -102,4 +103,95 @@ form{
 
 header h1 {
   text-align: center;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-image: url(/img/background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover
+}
+
+.formContainer{
+  display: flex;
+  align-self: center;
+  outline: 3px solid grey;
+  width: 40%;
+  background: white;
+}
+
+.formContainer form{
+  display: flex;
+  align-self: center;
+  /* outline: 3px solid grey; */
+  width: 40%;
+  margin-left: 225px;
+  
+}
+
+.tblContain{
+  width: 40%;
+  display: flex;
+  align-self: center;
+  outline: 3px solid grey;
+  background: white;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.project-data {
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
+  
+}
+
+.project-data li{
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
+  
+}
+
+.project-data li span{
+  display: flex;
+  justify-content: center;
+
+  text-align: center;
+  margin-left: 150px;
+}
+
+.main{
+  background: pink;
+}
+
+h3{
+ background: white;
+}
+
+.wordBox{
+
+}
+
+*{
+  border-radius: 5px;
+}
+
+h1{
+  font-family: Arial, Helvetica, sans-serif;
+  /* font-weight: bolder;
+  font-size: 3em; */
+}
+
+.white{
+  background: white;
+}
+
+th, td, ul{
+  border: 2px solid grey;
 }
