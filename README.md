@@ -4,7 +4,10 @@
 ![Scrum_project_management](https://user-images.githubusercontent.com/23227549/201429252-8fec6935-f3fd-4807-af8e-2e1dfa50d4bf.png)
 
 
-Tech used: Front end: HTML, CSS, JavaScript, 
+Tech used:
+
+Front end: HTML, CSS, JavaScript, 
+
 Back end: Node js, mongo db
 
 A full stack web application that allows the user to create and track programming projects between themselves and their teammates
